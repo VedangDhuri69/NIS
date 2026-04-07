@@ -3,54 +3,27 @@
 
 ---
 
-## PART A — Algorithm Steps (C Program)
+## PART A — Algorithm Steps
 
-**Step 1:** START
+Step 1 — Agree on Public Parameters: Both parties publicly agree on:
 
-**Step 2:** Declare variables:
-- `p` → large prime modulus
-- `g` → primitive root / generator modulo p
-- `a, b` → private keys of Alice and Bob
-- `A, B` → public keys of Alice and Bob
-- `s1, s2` → shared secrets computed by each party
+A large prime number p A primitive root (generator) g modulo p
 
-**Step 3:** Implement helper function: `modularExponentiation(base, exp, mod)`
-1. result ← 1
-2. base ← base % mod
-3. WHILE exp > 0 DO:
-   - IF (exp % 2 == 1) THEN result ← (result × base) % mod
-   - exp ← exp / 2  (integer division)
-   - base ← (base × base) % mod
-4. RETURN result
+Step 2 — Choose Private Keys (Secret):
 
-**Step 4:** Input public parameters `p` (prime) and `g` (generator)
+Alice chooses private key a, Bob chooses private key b, Both values remain secret.
 
-**Step 5:** Alice chooses private key `a` (random integer, 1 < a < p-1)
+Step 3 — Compute Public Keys:
 
-**Step 6:** Bob chooses private key `b` (random integer, 1 < b < p-1)
+Alice computes: A = g^a mod p Bob computes: B = g^b mod p
 
-**Step 7:** Alice computes her public key:
-- A ← modularExponentiation(g, a, p)
+Step 4 — Exchange Public Keys:
 
-**Step 8:** Bob computes his public key:
-- B ← modularExponentiation(g, b, p)
+Alice sends A to Bob (over insecure channel). Bob sends B to Alice (over insecure channel).
 
-**Step 9:** Alice sends A to Bob; Bob sends B to Alice
-(exchange happens over the insecure channel)
+Step 5 — Compute Shared Secret:
 
-**Step 10:** Alice computes shared secret:
-- s1 ← modularExponentiation(B, a, p)
-
-**Step 11:** Bob computes shared secret:
-- s2 ← modularExponentiation(A, b, p)
-
-**Step 12:** Verify:
-- IF s1 == s2 THEN → Shared secret established = s1
-- ELSE → ERROR: Keys do not match
-
-**Step 13:** Display: p, g, A, B, and shared_secret
-
-**Step 14:** STOP
+Alice computes: S = B^a mod p Bob computes: S = A^b mod p Mathematically, both arrive at: S = g^ab mod p ✅
 
 ---
 
