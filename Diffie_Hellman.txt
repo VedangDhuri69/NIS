@@ -1,0 +1,37 @@
+Step1:
+
+1. Choose a large prime number p.
+
+2. Choose a primitive root g of p.
+
+These values are public and known to both
+users.
+
+p = prime number
+
+g = primitive root of p
+
+Step2:
+
+User A selects a private key a.
+
+User B selects a private key b.
+
+Step3:
+
+Public keys are generated using modular
+exponentiation:
+
+A = g^a mod p
+
+B = g^b mod p
+
+Step4:
+
+User A computes shared key:
+
+K = B^a mod p
+
+User B computes shared key:
+
+K = A^b mod p
